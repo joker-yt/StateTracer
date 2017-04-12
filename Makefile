@@ -11,6 +11,12 @@ all:
 	$(TAGS) -R
 
 sample:
+	@for i in $(SAMPLEDIR) ; \
+	do \
+	$(MAKE) -C $$i $@; \
+	done
+
+doc:
 	@for i in $(DOCDIR) ; \
 	do \
 	$(MAKE) -C $$i $@; \
