@@ -1,7 +1,8 @@
 SUBDIRS = src
+TESTDIR = test
 SAMPLEDIR = sample
 DOCDIR = doc
-TAGS=ctags
+TAGS = ctags
 
 all:
 	@for i in $(SUBDIRS) ; \
@@ -18,6 +19,12 @@ sample:
 
 doc:
 	@for i in $(DOCDIR) ; \
+	do \
+	$(MAKE) -C $$i $@; \
+	done
+
+clean:
+	@for i in $(SUBDIRS) $(TESTDIR) $(SAMPLEDIR) $(DOCDIR) ; \
 	do \
 	$(MAKE) -C $$i $@; \
 	done

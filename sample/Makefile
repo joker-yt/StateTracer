@@ -13,3 +13,6 @@ $(TARGET): $(SRC)
 
 exec: $(TARGET)
 	./$<
+
+clean:
+	rm -fr $(TARGET)
