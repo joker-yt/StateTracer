@@ -3,6 +3,7 @@ TESTDIR = test
 SAMPLEDIR = sample
 DOCDIR = doc
 TAGS = ctags
+PLANTUML_JARPATH=~
 
 all:
 	@for i in $(SUBDIRS) ; \
@@ -18,6 +19,7 @@ sample:
 	done
 
 doc:
+	java -jar $(PLANTUML_JARPATH)/plantuml.jar -v -o ../doc/image/ -r src
 	@for i in $(DOCDIR) ; \
 	do \
 	$(MAKE) -C $$i $@; \

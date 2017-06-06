@@ -6,6 +6,30 @@
 #include "CTransition.h"
 #include <assert.h>
 
+/**
+* @brief CStateCordinator
+* @image html "../image/CStateCordinator.png"
+* @cond
+* @startuml CStateCordinator.png
+*
+* Create CStateCordinator
+* main -> CStateCordinator: new
+*
+* Create CState1
+* main -> CState1: new
+* CState1 --> main: state_obj1
+
+* Create CState2
+* main -> CState2: new
+* CState2 --> main: state_obj2
+*
+* main -> CStateCordinator:PushNewState(state_obj1)
+* main -> CStateCordinator:PushNewState(state_obj2)
+*
+* @enduml
+* @endcond
+*/
+
 class CStateCordinator {
 private:
 protected:

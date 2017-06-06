@@ -5,6 +5,18 @@
 #include <string>
 #include <iostream>
 
+/**
+* @brief CState
+* @image html "../image/CState.png"
+* @cond
+* @startuml CState.png
+*
+* Foo -> Server: Request
+* Server --> Foo: Response
+*
+* @enduml
+* @endcond
+*/
 class CState {
 private:
 protected:
