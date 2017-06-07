@@ -6,14 +6,36 @@
 #include <iostream>
 
 /**
-* @brief CState
-* @image html "../image/CState.png"
+* @brief    Object about the Status
+* @details  CStatus. This class has some CAction classes (shows \n
+            a behavior), and defines an action how an application \n
+            should behave when received each event. \n\n
+
+            The classes in an application should be created by \n
+            inherriting CState class.
+* @image    html "../image/CState_Initial.png"
 * @cond
-* @startuml CState.png
+* @startuml CState_Initial.png
 *
-* Foo -> Server: Request
-* Server --> Foo: Response
+* Create CState
+* main -> CState: new
+* CState --> main:
+
+* Create CWorker
+* main -> CWorker: new
+* CWorker --> main: worker_obj
+
+* Create CAction
+* main -> CAction: new
+* CAction --> main: action_obj
 *
+* main -> CWorker: PushAction(action_obj)
+* CWorker --> main:
+
+* main -> CState:PushWorker(worker_obj)
+* CState --> main:
+* note left : Ready to action
+
 * @enduml
 * @endcond
 */
