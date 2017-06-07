@@ -2,8 +2,8 @@
 #define __CState
 
 #include "CWorker.h"
-#include <string>
 #include <iostream>
+#include <string>
 
 /**
 * @brief    Object about the Status
@@ -53,7 +53,7 @@ public:
   virtual ~CState(){};
   std::string &Name() { return _name; }
   void PushWorker(CWorker *wk) { _worker = wk; }
-  virtual bool Notified(std::string ev){};
+  virtual bool Notified(std::string ev) { return false; };
 };
 
 #endif /* end of include guard: __CState */

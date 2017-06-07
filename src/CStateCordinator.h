@@ -1,10 +1,10 @@
 #ifndef __CSTATECORDINATOR_H__
 #define __CSTATECORDINATOR_H__
 
-#include <vector>
 #include "CState.h"
 #include "CTransition.h"
 #include <assert.h>
+#include <vector>
 
 /**
 * @brief    Main behavior of the states
@@ -73,11 +73,18 @@
 * @endcond
 */
 
+typedef enum {
+  CONDTYPE_PRE = 0,
+  CONDTYPE_POST,
+} CondionType_e;
+
 class CStateCordinator {
 private:
 protected:
   std::vector<CState *> _v_state;
   std::vector<CTransition *> _v_transition;
+  std::vector<const CCondition *> _v_pre_condition;
+  std::vector<const CCondition *> _v_post_condition;
   CState *_p_current;
 
   CState *state(std::string name) {
@@ -111,10 +118,15 @@ public:
     }
   }
   void PushStateTransition(CTransition *tr) { _v_transition.push_back(tr); };
-  void PushStateTransitionWithCondition(std::string src, std::string dest,
-                                        std::string event, CCondition &cond) {
-    assert(1);
-  };
+  void PushCondion(const CondionType_e typ, const CCondition *cond) {
+    if (typ == CONDTYPE_PRE) {
+      _v_pre_condition.push_back(cond);
+    } else if (typ == CONDTYPE_POST) {
+      _v_post_condition.push_back(cond);
+    } else {
+      // do nothing
+    }
+  }
 
   virtual void Notified(std::string ev) {
 
