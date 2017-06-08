@@ -4,7 +4,6 @@
 #include "CState.h"
 #include "CTransition.h"
 #include <assert.h>
-#include <vector>
 
 /**
 * @brief    Main behavior of the states
@@ -60,7 +59,7 @@
 * @section  Event
 *           By Receiving a event, CStateCordinator launch action of
             "current state".
-* @image html "../image/CStateCordinator_event.png"
+* @image    html "../image/CStateCordinator_event.png"
 * @cond
 * @startuml CStateCordinator_event.png
 * main -> CStateCordinator:Notified(event1)
@@ -72,19 +71,11 @@
 * @enduml
 * @endcond
 */
-
-typedef enum {
-  CONDTYPE_PRE = 0,
-  CONDTYPE_POST,
-} CondionType_e;
-
 class CStateCordinator {
 private:
 protected:
   std::vector<CState *> _v_state;
   std::vector<CTransition *> _v_transition;
-  std::vector<const CCondition *> _v_pre_condition;
-  std::vector<const CCondition *> _v_post_condition;
   CState *_p_current;
 
   CState *state(std::string name) {
@@ -118,16 +109,6 @@ public:
     }
   }
   void PushStateTransition(CTransition *tr) { _v_transition.push_back(tr); };
-  void PushCondion(const CondionType_e typ, const CCondition *cond) {
-    if (typ == CONDTYPE_PRE) {
-      _v_pre_condition.push_back(cond);
-    } else if (typ == CONDTYPE_POST) {
-      _v_post_condition.push_back(cond);
-    } else {
-      // do nothing
-    }
-  }
-
   virtual void Notified(std::string ev) {
 
     bool waivered_own_state = _p_current->Notified(ev);

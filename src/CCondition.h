@@ -5,6 +5,16 @@
 #include <string>
 
 /**
+* @brief    Condiion Type
+* @details  Condiion Type has 2 types. One is "Pre-condition", \n
+            and another is "post-condition".
+*/
+typedef enum {
+  CONDTYPE_PRE = 0,
+  CONDTYPE_POST,
+} CondionType_e;
+
+/**
 * @brief    Object about some condition
 * @details  CCondition. This class represent some conditions \n
             (maybe "event" type). Condition should be "pre-condition" or \n
@@ -22,15 +32,15 @@
 
 * @image    html "../image/CCondition_PrePostAction.png"
 * @cond
-@startuml CCondition_PrePostAction.png
-state CState {
-[*] -> PreCondition
-PreCondition --> [*]: Pre-Condition is true
-PreCondition -> Action
-Action -> PostCondition
-PostCondition --> [*]: Post-Condition is true
-}
-@enduml
+* @startuml CCondition_PrePostAction.png
+* state CState {
+* [*] -> PreCondition
+* PreCondition --> [*]: Pre-Condition is true
+* PreCondition -> Action
+* Action -> PostCondition
+* PostCondition --> [*]: Post-Condition is true
+* }
+* @enduml
 * @endcond
 
 * @section  Initialization
@@ -56,7 +66,7 @@ protected:
 public:
   CCondition(const std::string &str) : _condition(str){};
   virtual ~CCondition(){};
-  virtual bool IsEqual(const std::string &target) {
+  virtual bool Meets(const std::string &target) {
     return (_condition.compare(target) == 0) ? true : false;
   };
   virtual bool Includes(const std::string &target) {

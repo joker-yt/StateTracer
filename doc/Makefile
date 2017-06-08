@@ -4,4 +4,4 @@ doc: $(SRC)
 	doxygen doxy.conf
 
 clean:
-	rm -fr html latex
+	rm -fr html latex image
