@@ -1,18 +1,32 @@
 TARGET=app
-SRC= main.cpp
+SRC=main.cpp CSampleCordinator.cpp
+OBJS=$(subst .cpp,.o,$(SRC))
 INCLUDES=../src
 HEADER= CState.h, CTestState.h, CStateChanger.h
 CPPFLAGS=-g
-CPPFLAGS=-std=c++11
+CPPFLAGS+=-std=c++11
 CPPFLAGS+=-I$(INCLUDES)
+LDFLAGS=-L../
+EXTERNAL_OBJS=../src/CStateCordinator.o ../src/CState.o
+
+CXX=g++
+
+.PHONY:	all	check-syntax clean
 
 all: $(TARGET)
 
-$(TARGET): $(SRC)
-	g++ $< -o $@ $(CPPFLAGS)
+$(TARGET): $(OBJS)
+	g++ $^ $(EXTERNAL_OBJS) -o $@ $(CPPFLAGS)
+
+.cpp.o:
+	g++ -c $< $(CPPFLAGS)
 
 exec: $(TARGET)
 	./$<
 
+
+check-syntax:
+	$(CXX) -o null -fsyntax-only $(CHK_SOURCES) $(INCLUDES) $(CPPFLAGS)
+
 clean:
-	rm -fr $(TARGET)
+	rm -fr $(TARGET) *.o *.gch

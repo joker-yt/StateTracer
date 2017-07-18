@@ -6,10 +6,11 @@
 class CSampleState2 : public CState {
 private:
 public:
-  CSampleState2() { _name = "CSampleState2"; };
+  CSampleState2(std::string name) { _name = name; };
   virtual ~CSampleState2(){};
   bool Notified(std::string ev) {
-    _worker->Action("action2");
+    if (_worker != nullptr)
+      _worker->Action("action2");
     return true;
   };
 };

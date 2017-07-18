@@ -23,11 +23,11 @@ public:
     _cond = cond;
   };
   virtual ~CTransition(){};
-  std::string &Name() { return _name; };
-  std::string &SrcStateName() { return _src_state; };
-  std::string &DstStateName() { return _dst_state; };
-  std::string &EventName() { return _ev; };
-  CCondition *Condition() { return _cond; };
+  const std::string Name() const { return _name; };
+  const std::string SrcStateName() const { return _src_state; };
+  const std::string DstStateName() const { return _dst_state; };
+  const std::string EventName() const { return _ev; };
+  CCondition *Condition() const { return _cond; };
 };
 
 #endif /* end of include guard: __CTRANSITION_H__ */

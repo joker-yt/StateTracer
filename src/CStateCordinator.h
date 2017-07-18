@@ -8,7 +8,8 @@
 /**
 * @brief    Main behavior of the states
 * @details  CStateCordinator. This class has some CState classes, \n
-            and the one of them behaves the "current status". \n\n
+            and the one of them behaves the "current status". \n
+            This class also behaves as a "Abstract Factory" pattern. \n\n
 
             If CStateCordinator receives a event, \n
             it notifies the event to "current class". \n
@@ -96,32 +97,23 @@ protected:
         return state((*iter)->DstStateName());
       }
     }
-  }
+    return nullptr;
+  };
+
+  void push_new_state(CState *st);
+  void push_state_transition(CTransition *tr);
 
 public:
-  CStateCordinator() : _p_current(0){};
+  CStateCordinator();
+  CStateCordinator(const CStateCordinator &sc);
   virtual ~CStateCordinator(){};
 
-  void PushNewState(CState *st) {
-    _v_state.push_back(st);
-    if (!_p_current) {
-      _p_current = st;
-    }
-  }
-  void PushStateTransition(CTransition *tr) { _v_transition.push_back(tr); };
-  virtual void Notified(std::string ev) {
-
-    bool waivered_own_state = _p_current->Notified(ev);
-    if (waivered_own_state == true) {
-      CState *next = select_out_for_next_state(ev);
-      if (next)
-        _p_current = next;
-    }
-
-    return;
-  }
   CState *CurrentState() { return _p_current; };
   CState *NextState(std::string name) { return state(name); }
+  virtual bool CreateState();
+  virtual bool CreateTransition();
+  virtual void Notified(std::string ev);
+
   void Debug() {
     for (auto iter = _v_state.begin(); iter != _v_state.end(); ++iter) {
       std::cout << "Debug: " << (*iter)->Name() << "\n";

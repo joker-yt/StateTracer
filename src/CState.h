@@ -1,8 +1,8 @@
 #ifndef __CSTATE_H__
 #define __CSTATE_H__
 
-#include "CWorker.h"
 #include "CCondition.h"
+#include "CWorker.h"
 #include <iostream>
 #include <string>
 #include <vector>
@@ -56,18 +56,12 @@ protected:
 
 public:
   CState(){};
+  CState(std::string name) { _name = name; };
+  CState(const CState &obj) = default;
   virtual ~CState(){};
   std::string &Name() { return _name; }
-  void PushWorker(CWorker *wk) { _worker = wk; }
-  void PushCondion(const CondionType_e typ, const CCondition *cond) {
-    if (typ == CONDTYPE_PRE) {
-      _v_pre_condition.push_back(cond);
-    } else if (typ == CONDTYPE_POST) {
-      _v_post_condition.push_back(cond);
-    } else {
-      // do nothing
-    }
-  }
+  void PushWorker(CWorker *wk);
+  void PushCondion(const CondionType_e typ, const CCondition *cond);
   virtual bool Notified(std::string ev) { return false; };
 };
 
