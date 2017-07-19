@@ -14,10 +14,7 @@ public:
   CWorker(){};
   virtual ~CWorker(){};
   std::string &Name() { return _name; };
-  void PushAction(std::string name, CAction *action) {
-    _action_map[name] = action;
-  }
-  virtual void Action(std::string action) { _action_map[action]->Action(); };
+  virtual void Do(std::string action) { _action_map[action]->Action(); };
 };
 
 #endif /* end of include guard: __CWORKER_H__ */

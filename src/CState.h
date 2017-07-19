@@ -51,12 +51,17 @@ protected:
   std::vector<const CCondition *> _v_pre_condition;
   std::vector<const CCondition *> _v_post_condition;
 
-  void action(std::string action) { _worker->Action(action); };
+  void action(std::string action) { _worker->Do(action); };
   void decide_to_do(std::string ev){};
+
+  virtual void create_worker();
 
 public:
   CState(){};
-  CState(std::string name) { _name = name; };
+  CState(std::string name) {
+    _name = name;
+    create_worker();
+  };
   CState(const CState &obj) = default;
   virtual ~CState(){};
   std::string &Name() { return _name; }
