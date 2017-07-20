@@ -65,7 +65,7 @@ public:
   virtual void Ready(){};
   std::string &Name() { return _name; }
   void PushCondion(const CondionType_e typ, const CCondition *cond);
-  virtual bool Notified(std::string ev) { return false; };
+  virtual bool Notified(std::string ev) { return true; };
 };
 
 #endif /* end of include guard: __CSTATE_H__ */

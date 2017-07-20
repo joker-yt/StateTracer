@@ -72,6 +72,11 @@
 * @enduml
 * @endcond
 */
+
+const char StateName_Initial[] = "InitialState";
+
+const char EventName_Initial[] = "InitialEvent";
+
 class CStateCordinator {
 private:
 protected:
@@ -89,7 +94,7 @@ protected:
     return 0;
   };
 
-  CState *select_out_for_next_state(std::string ev) {
+  CState *select_out_next_state(std::string ev) {
     for (auto iter = _v_transition.begin(); iter != _v_transition.end();
          ++iter) {
       if (_p_current->Name() == (*iter)->SrcStateName() &&
@@ -112,6 +117,7 @@ public:
   CState *NextState(std::string name) { return state(name); }
   virtual bool CreateState();
   virtual bool CreateTransition();
+  void Ready();
   virtual void Notified(std::string ev);
 
   void Debug() {

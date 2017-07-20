@@ -7,6 +7,8 @@ int main(int argc, char *argv[]) {
 
   cordinator.CreateState();
   cordinator.CreateTransition();
+
+  cordinator.Ready();
   std::cout << "start!"
             << "\n";
   std::cout << "now: -> " << cordinator.CurrentState()->Name() << "\n";
