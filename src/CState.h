@@ -54,18 +54,16 @@ protected:
   void action(std::string action) { _worker->Do(action); };
   void decide_to_do(std::string ev){};
 
-  virtual void create_worker();
+  virtual void create_worker(){};
+  virtual void teach_action_to_worker(){};
 
 public:
   CState(){};
-  CState(std::string name) {
-    _name = name;
-    create_worker();
-  };
+  CState(std::string name) { _name = name; };
   CState(const CState &obj) = default;
   virtual ~CState(){};
+  virtual void Ready(){};
   std::string &Name() { return _name; }
-  void PushWorker(CWorker *wk);
   void PushCondion(const CondionType_e typ, const CCondition *cond);
   virtual bool Notified(std::string ev) { return false; };
 };

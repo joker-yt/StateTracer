@@ -1,5 +1,5 @@
 TARGET=app
-SRC=main.cpp CSampleCordinator.cpp
+SRC=main.cpp CSampleCordinator.cpp CSampleState1.cpp CSampleState2.cpp
 OBJS=$(subst .cpp,.o,$(SRC))
 INCLUDES=../src
 HEADER= CState.h, CTestState.h, CStateChanger.h

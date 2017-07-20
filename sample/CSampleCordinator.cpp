@@ -6,9 +6,11 @@ bool CSampleCordinator::CreateState() {
 
   CState *st;
   st = new CSampleState1(std::string{StateName_1});
+  st->Ready();
   push_new_state(st);
 
   st = new CSampleState2(std::string{StateName_2});
+  st->Ready();
   push_new_state(st);
   Debug();
 

@@ -3,6 +3,7 @@
 
 #include "CAction.h"
 #include <unordered_map>
+#include <string>
 
 class CWorker {
 private:
@@ -14,6 +15,9 @@ public:
   CWorker(){};
   virtual ~CWorker(){};
   std::string &Name() { return _name; };
+  void LearnAction(std::string act_name, CAction *action) {
+    _action_map[act_name] = action;
+  };
   virtual void Do(std::string action) { _action_map[action]->Action(); };
 };
 

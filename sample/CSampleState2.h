@@ -2,21 +2,18 @@
 #define __CSAMPLESTATE2_H__
 
 #include "CState.h"
-#include "CSampleWorker.h"
 
 class CSampleState2 : public CState {
 private:
 protected:
-  void create_worker() { _worker = new CSampleWorker(); };
+  void create_worker();
+  void teach_action_to_worker();
 
 public:
-  CSampleState2(std::string name) : CState(name) { create_worker(); };
+  CSampleState2(std::string name) : CState(name){};
   virtual ~CSampleState2(){};
-  bool Notified(std::string ev) {
-    if (_worker != nullptr)
-      _worker->Do(std::string{ActionName_2});
-    return true;
-  };
+  void Ready();
+  bool Notified(std::string ev);
 };
 
 #endif /* end of include guard: __CSAMPLESTATE2_H__ */
