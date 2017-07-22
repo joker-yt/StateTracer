@@ -2,13 +2,14 @@
 #define __CSAMPLESTATE1_H__
 
 #include "CState.h"
-#include "CWorker.h"
+#include "CEventBranch.h"
 
 class CSampleState1 : public CState {
 private:
 protected:
   void create_worker();
   void teach_action_to_worker();
+  void create_event_branch();
 
 public:
   CSampleState1(std::string name) : CState(name){};

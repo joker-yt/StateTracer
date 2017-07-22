@@ -2,6 +2,7 @@
 #define __CSAMPLESTATE2_H__
 
 #include "CState.h"
+#include "CEventBranch.h"
 
 class CSampleState2 : public CState {
 private:

@@ -43,11 +43,14 @@
 * @enduml
 * @endcond
 */
+#include "CEventBranch.h"
+
 class CState {
 private:
 protected:
   std::string _name;
   CWorker *_worker;
+  std::vector<CEventBranch> _v_event_branch;
   std::vector<const CCondition *> _v_pre_condition;
   std::vector<const CCondition *> _v_post_condition;
 
@@ -65,6 +68,7 @@ public:
   virtual void Ready(){};
   std::string &Name() { return _name; }
   void PushCondion(const CondionType_e typ, const CCondition *cond);
+  virtual void PushEventBranch(std::Initilizer_list<CEventBranch> eb);
   virtual bool Notified(std::string ev) { return true; };
 };
 

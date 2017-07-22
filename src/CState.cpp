@@ -1,4 +1,5 @@
 #include "CState.h"
+void CState::NewEventBranch(CEventBranch eb) { _v_event_branch.push_back(eb); };
 
 void CState::PushCondion(const CondionType_e typ, const CCondition *cond) {
   if (typ == CONDTYPE_PRE) {

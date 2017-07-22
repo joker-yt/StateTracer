@@ -13,6 +13,7 @@ class CSampleCordinator : public CStateCordinator {
 private:
   /* data */
 public:
+  static const char *EventNameList[];
   CSampleCordinator(){};
   virtual ~CSampleCordinator(){};
   /*! \fn bool CreateState()

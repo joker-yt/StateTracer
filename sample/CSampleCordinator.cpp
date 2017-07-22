@@ -2,7 +2,13 @@
 #include "CSampleState1.h"
 #include "CSampleState2.h"
 
+const char *CSampleCordinator::EventNameList[] = {EventName_Initial,
+                                                  EventName_1, EventName_2};
+
 bool CSampleCordinator::CreateState() {
+  for (auto p : EventNameList) {
+    peb = new CEventBranch(std::string{p});
+  }
 
   CState *st;
   st = new CState(std::string{StateName_Initial});
