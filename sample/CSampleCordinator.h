@@ -14,7 +14,7 @@ private:
   /* data */
 public:
   static const char *EventNameList[];
-  CSampleCordinator(){};
+  CSampleCordinator(IHandler *phndl) : CStateCordinator(phndl){};
   virtual ~CSampleCordinator(){};
   /*! \fn bool CreateState()
    * @brief Factory method for States

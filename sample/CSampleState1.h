@@ -12,7 +12,7 @@ protected:
   void create_event_branch();
 
 public:
-  CSampleState1(std::string name) : CState(name){};
+  CSampleState1(std::string name, IContext *pctx) : CState(name, pctx){};
   virtual ~CSampleState1(){};
   void Ready();
   bool Notified(std::string ev);

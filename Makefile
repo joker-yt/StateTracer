@@ -1,4 +1,4 @@
-SUBDIRS = src
+SUBDIRS = src sample
 TESTDIR = test
 SAMPLEDIR = sample
 DOCDIR = doc
@@ -10,7 +10,6 @@ all:
 	do \
 	$(MAKE) -C $$i $@; \
 	done
-	$(TAGS) -R
 
 sample:
 	@for i in $(SAMPLEDIR) ; \

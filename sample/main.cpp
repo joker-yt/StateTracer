@@ -1,9 +1,10 @@
 #include "CSampleCordinator.h"
+#include "IHandler.h"
 #include <iostream>
 
 int main(int argc, char *argv[]) {
-
-  CSampleCordinator cordinator;
+  IHandler *phndl = new IHandler{};
+  CSampleCordinator cordinator{phndl};
 
   cordinator.CreateState();
   cordinator.CreateTransition();

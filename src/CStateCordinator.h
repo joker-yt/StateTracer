@@ -3,6 +3,8 @@
 
 #include "CState.h"
 #include "CTransition.h"
+#include "IContext.h"
+#include "IHandler.h"
 #include <assert.h>
 
 /**
@@ -83,6 +85,8 @@ protected:
   std::vector<CState *> _v_state;
   std::vector<CTransition *> _v_transition;
   CState *_p_current;
+  IContext *_p_ctx;
+  IHandler *_p_hndl;
 
   CState *state(std::string name) {
     for (auto iter = _v_state.begin(); iter != _v_state.end(); ++iter) {
@@ -94,22 +98,13 @@ protected:
     return 0;
   };
 
-  CState *select_out_next_state(std::string ev) {
-    for (auto iter = _v_transition.begin(); iter != _v_transition.end();
-         ++iter) {
-      if (_p_current->Name() == (*iter)->SrcStateName() &&
-          (*iter)->EventName() == ev) {
-        return state((*iter)->DstStateName());
-      }
-    }
-    return nullptr;
-  };
+  CState *select_out_next_state(std::string ev);
 
   void push_new_state(CState *st);
   void push_state_transition(CTransition *tr);
 
 public:
-  CStateCordinator();
+  CStateCordinator(IHandler *phndl);
   CStateCordinator(const CStateCordinator &sc);
   virtual ~CStateCordinator(){};
 
@@ -118,7 +113,7 @@ public:
   virtual bool CreateState();
   virtual bool CreateTransition();
   void Ready();
-  virtual void Notified(std::string ev);
+  void Notified(std::string ev);
 
   void Debug() {
     for (auto iter = _v_state.begin(); iter != _v_state.end(); ++iter) {
@@ -126,5 +121,4 @@ public:
     }
   }
 };
-
 #endif /* end of include guard: __CSTATECORDINATOR_H__ */

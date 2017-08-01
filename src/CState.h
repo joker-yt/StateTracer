@@ -3,6 +3,7 @@
 
 #include "CCondition.h"
 #include "CWorker.h"
+#include "IContext.h"
 #include <iostream>
 #include <string>
 #include <vector>
@@ -45,11 +46,14 @@
 */
 #include "CEventBranch.h"
 
+enum EventCompare_e { Different_e = 0, Same_e };
+
 class CState {
 private:
 protected:
   std::string _name;
   CWorker *_worker;
+  IContext *_p_ctx;
   std::vector<CEventBranch> _v_event_branch;
   std::vector<const CCondition *> _v_pre_condition;
   std::vector<const CCondition *> _v_post_condition;
@@ -57,18 +61,22 @@ protected:
   void action(std::string action) { _worker->Do(action); };
   void decide_to_do(std::string ev){};
 
+  EventCompare_e event_compare(const std::string ev1, const std::string ev2);
+
   virtual void create_worker(){};
   virtual void teach_action_to_worker(){};
 
 public:
   CState(){};
-  CState(std::string name) { _name = name; };
+  CState(std::string name, IContext *pctx) {
+    _name = name;
+    _p_ctx = pctx;
+  };
   CState(const CState &obj) = default;
   virtual ~CState(){};
   virtual void Ready(){};
   std::string &Name() { return _name; }
   void PushCondion(const CondionType_e typ, const CCondition *cond);
-  virtual void PushEventBranch(std::Initilizer_list<CEventBranch> eb);
   virtual bool Notified(std::string ev) { return true; };
 };
 

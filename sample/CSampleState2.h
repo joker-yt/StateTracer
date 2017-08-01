@@ -11,7 +11,7 @@ protected:
   void teach_action_to_worker();
 
 public:
-  CSampleState2(std::string name) : CState(name){};
+  CSampleState2(std::string name, IContext *pctx) : CState(name, pctx){};
   virtual ~CSampleState2(){};
   void Ready();
   bool Notified(std::string ev);

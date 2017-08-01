@@ -1,5 +1,9 @@
 #include "CState.h"
-void CState::NewEventBranch(CEventBranch eb) { _v_event_branch.push_back(eb); };
+
+EventCompare_e CState::event_compare(const std::string ev1,
+                                     const std::string ev2) {
+  return ev1.compare(ev2) == 0 ? Same_e : Different_e;
+};
 
 void CState::PushCondion(const CondionType_e typ, const CCondition *cond) {
   if (typ == CONDTYPE_PRE) {

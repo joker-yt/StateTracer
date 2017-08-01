@@ -1,12 +1,23 @@
 #include "CStateCordinator.h"
 
-CStateCordinator::CStateCordinator() : _p_current(0) {}
+CStateCordinator::CStateCordinator(IHandler *phndl)
+    : _p_current(nullptr), _p_ctx(nullptr), _p_hndl(phndl) {}
 
 CStateCordinator::CStateCordinator(const CStateCordinator &sc) {}
 
 void CStateCordinator::push_new_state(CState *st) { _v_state.push_back(st); }
 void CStateCordinator::push_state_transition(CTransition *tr) {
   _v_transition.push_back(tr);
+};
+
+CState *CStateCordinator::select_out_next_state(std::string ev) {
+  for (auto iter = _v_transition.begin(); iter != _v_transition.end(); ++iter) {
+    if (_p_current->Name() == (*iter)->SrcStateName() &&
+        (*iter)->EventName() == ev) {
+      return state((*iter)->DstStateName());
+    }
+  }
+  return nullptr;
 };
 
 void CStateCordinator::Notified(std::string ev) {
